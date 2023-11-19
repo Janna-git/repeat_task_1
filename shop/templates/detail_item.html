@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>{{ item.name }}</h1></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% for purchase in item.purchase_set.all %}
+        <input type="radio" name="purchase" id="purchase{{ forloop.counter }}" value="{{ purchase.id }}">
+        <label for="purchase{{ forloop.counter }}">{{ purchase.name }}</label><br>
+    {% endfor %}
+</fieldset>
+</form>
+
+{% endblock content %}
